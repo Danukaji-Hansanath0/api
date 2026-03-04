@@ -10,14 +10,14 @@ async function createPaymentSession(amount, customerData) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'X-API-Key': 'RF2024SecureKey' // Your API passcode
+        'X-API-Key': 'RF2024SecureKey' 
       },
       body: JSON.stringify({
         amount: amount,
         customer_name: customerData.name,
         customer_email: customerData.email,
         customer_phone: customerData.phone,
-        order_description: 'Premium Ride + Insurance' // Optional
+        order_description: 'Premium Ride + Insurance' 
       })
     });
 
@@ -59,8 +59,7 @@ function PaymentScreen() {
       // Open payment page in device browser
       Linking.openURL(paymentData.payment_url);
       
-      // OR use WebView to keep user in app
-      // navigation.navigate('PaymentWebView', { url: paymentData.payment_url });
+  
     }
 
     setLoading(false);

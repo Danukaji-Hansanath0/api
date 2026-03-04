@@ -1,9 +1,5 @@
-<?php
-/**
- * RideFlexi Payment Gateway
- * Secure checkout powered by PayHere
- */
 
+<?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 session_start();
@@ -432,16 +428,9 @@ if (($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['process_payment'])) 
 $display_amount = isset($_GET['amount']) ? number_format((float) $_GET['amount'], 2) : '2,500.00';
 $raw_amount = isset($_GET['amount']) ? $_GET['amount'] : '2500.00';
 
-// Get customer data from URL if provided
-$customer_name = isset($_GET['name']) ? $_GET['name'] : '';
-$customer_email = isset($_GET['email']) ? $_GET['email'] : '';
-$customer_phone = isset($_GET['phone']) ? $_GET['phone'] : '';
-$order_description = isset($_GET['description']) ? $_GET['description'] : 'RideFlexi Premium Service';
+$amount = isset($_GET['amount']) ? $_GET['amount'] : 2500.00;
+$amount = number_format((float)$amount, 2, '.', '');
 
-// Split name if provided
-$name_parts = explode(' ', $customer_name, 2);
-$first_name = isset($name_parts[0]) ? $name_parts[0] : '';
-$last_name = isset($name_parts[1]) ? $name_parts[1] : '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -738,8 +727,36 @@ $last_name = isset($name_parts[1]) ? $name_parts[1] : '';
                 <span>Total Amount</span>
                 <span>LKR <?php echo htmlspecialchars($display_amount); ?></span>
             </div>
+        </form>
+    </div>
+
+    <!-- RIGHT SIDE SUMMARY -->
+    <div class="summary-section">
+        <div class="summary-title">Order Summary</div>
+
+        <div class="summary-item">
+            <span>Premium Ride</span>
+            <span>LKR 2,000.00</span>
+        </div>
+
+        <div class="summary-item">
+            <span>Insurance</span>
+            <span>LKR 300.00</span>
+        </div>
+
+        <div class="summary-item">
+            <span>Service Fee</span>
+            <span>LKR 200.00</span>
+        </div>
+
+        <div class="summary-item total">
+            <span>Total</span>
+            <span>LKR <?= $amount ?></span>
         </div>
     </div>
+
+</div>
+
 </body>
 
 </html>
